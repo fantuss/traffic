@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401210103) do
+ActiveRecord::Schema.define(version: 20140402182959) do
 
   create_table "cart_entries", force: true do |t|
     t.integer  "count"
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(version: 20140401210103) do
     t.integer "dimension_id", null: false
   end
 
+  create_table "pages", force: true do |t|
+    t.string   "permalink"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shapes", force: true do |t|
     t.string   "name"
     t.text     "path"
@@ -75,6 +83,17 @@ ActiveRecord::Schema.define(version: 20140401210103) do
 
   add_index "signs", ["category_id"], name: "index_signs_on_category_id"
   add_index "signs", ["shape_id"], name: "index_signs_on_shape_id"
+
+  create_table "signs_substrates", id: false, force: true do |t|
+    t.integer "sign_id",      null: false
+    t.integer "substrate_id", null: false
+  end
+
+  create_table "substrates", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"
